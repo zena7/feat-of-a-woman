@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+
+import { useCallback, useEffect, useState } from 'react';
 // import reactLogo from './assets/react.svg';
 // import viteLogo from '/vite.svg';
 import clsx from 'clsx';
@@ -27,21 +29,13 @@ const dic = {
   Genuine: 'Настоящий',
 };
 
-const List = React.memo(function List({
-  items,
-  type = '',
-  className,
-  updateSelect,
-  ...props
-}) {
-  console.log('render again again again');
-
+function List({ items, type = '', className, updateSelect, ...props }) {
   const handleClick = useCallback(
     (event) => {
       let value = event.target;
       value.classList.add('li-active');
 
-      updateSelect({ value: value.textContent, type });
+      updateSelect({ value: value.textContent, type, href: value });
     },
     [type, updateSelect]
   );
@@ -59,9 +53,9 @@ const List = React.memo(function List({
       ))}
     </ul>
   );
-});
+}
 
-const shuffle = (ar) => {
+function shuffle(ar) {
   for (let i = ar.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
 
@@ -69,59 +63,113 @@ const shuffle = (ar) => {
   }
 
   return ar;
-};
+}
 
 function Game() {
-  const [ruList, setRuList] = useState(shuffle(Object.keys(dic))); // eslint-disable-line no-unused-vars
-  const [enList, setEnList] = useState(shuffle(Object.values(dic))); // eslint-disable-line no-unused-vars
+  const [enList, setEnList] = useState(() => shuffle(Object.keys(dic)));
+  const [ruList, setRuList] = useState(() => shuffle(Object.values(dic)));
   const [pairValues, setPairValues] = useState([]);
 
+  useEffect(() => {
+    console.log('RU', ruList);
+  }, [ruList]);
+
   const handleUpdateSelectValue = useCallback(
-    ({ value, type }) => {
+    ({ value, type, href }) => {
       if (pairValues.length === 0) {
-        return setPairValues((prev) => [...prev, { value, type }]);
+        return setPairValues((prev) => [...prev, { value, type, href }]);
       }
       if (pairValues[0].type !== type) {
         console.log('type:', pairValues[0].type, type);
-        return setPairValues((prev) => [...prev, { value, type }]);
+        return setPairValues((prev) => [...prev, { value, type, href }]);
       }
     },
     [pairValues]
   );
 
   useEffect(() => {
-    console.log('UPDATE', pairValues);
+    console.log('PAIR', pairValues);
     if (pairValues?.length === 2) {
       let result = isMatch(pairValues);
 
-      console.log('RESULT', result);
-      setPairValues((prev) => {
-        prev.length = 0;
-        return prev;
-      });
+      setTimeout(() => {
+        setPairValues((prev) => {
+          prev.length = 0;
+          return prev;
+        });
+      }, 3000);
     }
   }, [pairValues]);
 
   function isMatch([firstV, secondV]) {
-    console.log('HERE');
+    let isRightCouple = null;
+    let firstSelectLang = null;
 
     if (firstV.type === 'key') {
-      return dic[firstV.value] === secondV.value;
+      isRightCouple = dic[firstV.value] === secondV.value;
+      firstSelectLang = 'en';
+      // if (isRightCouple) {
+      //   console.log('YESSSSSSSSS');
+      //   setTimeout(() => {
+      //     console.log('УДАЛЯЮ');
+      //   }, 2500);
+      // }
     }
     if (firstV.type === 'value') {
-      return dic[secondV.value] === firstV.value;
+      isRightCouple = dic[secondV.value] === firstV.value;
+      firstSelectLang = 'ru';
     }
+
+    pairValues.forEach(({ value, type, href }) => {
+      if (isRightCouple) {
+        href.classList.add('li-right-couple');
+
+        if (firstSelectLang === 'ru') {
+          setTimeout(() => {
+            setRuList((prev) =>
+              prev.filter((item) => item !== pairValues[0].value)
+            );
+            setEnList((prev) =>
+              prev.filter((item) => item !== pairValues[1].value)
+            );
+          }, 2000);
+        } else {
+          setTimeout(() => {
+            setEnList((prev) =>
+              prev.filter((item) => item !== pairValues[0].value)
+            );
+            setRuList((prev) =>
+              prev.filter((item) => item !== pairValues[1].value)
+            );
+          }, 2000);
+        }
+      } else {
+        href.classList.add('li-false-couple');
+      }
+
+      setTimeout(() => {
+        href.classList.remove('li-active');
+        href.classList.remove('li-right-couple');
+        href.classList.remove('li-false-couple');
+      }, 2000);
+    });
+
+    return isRightCouple;
   }
 
   return (
     <div className="game-board">
       <List
         items={enList}
-        type="value"
+        type="key"
         className="list-of-values"
         updateSelect={handleUpdateSelectValue}
       />
-      <List items={ruList} type="key" updateSelect={handleUpdateSelectValue} />
+      <List
+        items={ruList}
+        type="value"
+        updateSelect={handleUpdateSelectValue}
+      />
     </div>
   );
 }
@@ -172,129 +220,3 @@ function App() {
 // }
 
 export default App;
-
-// import { useState, useEffect } from 'react';
-// // import reactLogo from './assets/react.svg';
-// // import viteLogo from '/vite.svg';
-// import clsx from 'clsx';
-// import './App.css';
-// import mainPic from './assets/hippo-and-hero.webp';
-
-// function Welcome({ name }) {
-//   return (
-//     <>
-//       <h1>Привет от {name}</h1>
-//       <img src={mainPic} alt="hippo" className="main-hippo" />
-//     </>
-//   );
-// }
-
-// const dic = {
-//   Kind: 'Добрый',
-//   Brave: 'Смелый',
-//   Strong: 'Сильный',
-//   Caring: 'Заботливый',
-//   Patient: 'Терпеливый',
-//   Responsive: 'Отзывчивый',
-//   Reliable: 'Надежный',
-//   Courageous: 'Мужественный',
-//   Persistent: 'Упорный',
-//   Genuine: 'Настоящий',
-// };
-
-// const example = {
-//   hi: 'привет',
-//   dear: 'дорогая',
-//   maggy: 'мэгги',
-// };
-
-// function List({ items, type = '', className, ...props }) {
-//   const [firstSelect, setFirstSelect] = useState(null);
-
-//   useEffect(() => {
-//     console.log('InEFFECT', firstSelect);
-//   }, [firstSelect]);
-
-//   function handleClick(event) {
-//     event.target.classList.add('li-active');
-
-//     let currValue = event.target.textContent;
-//     let res = checkSelection(currValue);
-
-//     res !== undefined && console.log('RESULT:', res);
-//   }
-
-//   function checkSelection(value) {
-//     let result = null;
-//     console.log('checkSelection', value);
-
-//     if (firstSelect === null || firstSelect?.type === type) {
-//       setFirstSelect((prev) => ({ value, type }));
-//       console.log('IN IF', firstSelect);
-//       return;
-//     } else {
-//       console.log('ELSE');
-//       result = isMatch(value);
-//       setFirstSelect((prev) => null);
-//     }
-//     return result;
-//   }
-
-//   function isMatch(value) {
-//     console.log('HERE');
-
-//     if (type === 'key') {
-//       return example[value] === firstSelect.value;
-//     }
-//     if (type === 'value') {
-//       return example[firstSelect.value] === value;
-//     }
-//   }
-
-//   return (
-//     <ul
-//       {...props}
-//       onClick={handleClick}
-//       className={clsx('list', className && className)}
-//     >
-//       {items.map((i) => (
-//         <li key={i} className="li-item">
-//           {i}
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
-// const shuffle = (ar) => {
-//   for (let i = ar.length - 1; i > 0; i--) {
-//     let j = Math.floor(Math.random() * (i + 1));
-
-//     [ar[i], ar[j]] = [ar[j], ar[i]];
-//   }
-
-//   return ar;
-// };
-
-// function Game() {
-//   return (
-//     <div className="game-board">
-//       <List
-//         items={shuffle(Object.values(example))}
-//         type="value"
-//         className="list-of-values"
-//       />
-//       <List items={shuffle(Object.keys(example))} type="key" />
-//     </div>
-//   );
-// }
-
-// function App() {
-//   // return <Game />;
-//   return (
-//     <>
-//       <Welcome name="Nata" />
-//       <Game />
-//     </>
-//   );
-// }
