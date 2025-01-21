@@ -1,0 +1,8 @@
+/* stylelint-disable-next-line selector-class-pattern */
+.itemHidden {
+  display: none;
+}
+/* stylelint-disable-next-line selector-class-pattern */
+.itemShow {
+  display: block;
+}
