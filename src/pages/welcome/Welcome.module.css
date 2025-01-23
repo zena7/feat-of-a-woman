@@ -18,7 +18,7 @@
   z-index: 2;
   top: 4.5vh;
   left: 2vw;
-  font-size: 6.8rem;
+  font-size: calc(1rem + 6vw);
   animation: move-in 1s linear;
 }
 
@@ -29,6 +29,12 @@
 
   100% {
     top: 5vh;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .cityHeader {
+    font-size: calc(1rem + 5vw);
   }
 }
 
@@ -58,7 +64,17 @@
 }
 
 .formLabel {
-  font-size: 2.8rem;
+  font-size: calc(1rem + 2.2vw);
+}
+
+@media screen and (max-width: 1770px) {
+  .welcomeForm {
+    padding-right: 5vw;
+  }
+
+  .formLabel {
+    font-size: calc(1rem + 2vw);
+  }
 }
 
 .inputCity {

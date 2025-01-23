@@ -1,21 +1,30 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import cityImg from '../../../public/assets/welcomeLeningrad.webp';
+import cityImg from '../../../src/assets/welcomeLeningrad.webp';
 import styles from './Welcome.module.css';
 
 function Welcome() {
-  const [showHeader, setShowHeader] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [input, setInput] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setShowHeader((prev) => !prev);
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      setShowHeader((prev) => !prev);
 
-    setTimeout(() => {
-      navigate('/warning');
-    }, 5000);
-  };
+      setTimeout(() => {
+        navigate('/warning');
+      }, 5000);
+    },
+    [navigate]
+  );
+
+  const handleChange = useCallback((event) => {
+    console.log(event.target.value);
+    setInput(event.target.value);
+  }, []);
 
   return (
     <>
@@ -32,7 +41,13 @@ function Welcome() {
         <label htmlFor="city" className={styles.formLabel}>
           In which city is the zoo located?
         </label>
-        <input type="text" id="city" className={styles.inputCity} />
+        <input
+          type="text"
+          id="city"
+          className={styles.inputCity}
+          value={input}
+          onChange={handleChange}
+        />
         <button type="submit" className={styles.btnCity}>
           Next
         </button>
