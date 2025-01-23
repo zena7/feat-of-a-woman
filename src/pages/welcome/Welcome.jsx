@@ -5,7 +5,7 @@ import cityImg from '../../../src/assets/welcomeLeningrad.webp';
 import styles from './Welcome.module.css';
 
 function Welcome() {
-  const [showHeader, setShowHeader] = useState(true);
+  const [showHeader, setShowHeader] = useState(false);
   const [input, setInput] = useState('');
   const navigate = useNavigate();
 
