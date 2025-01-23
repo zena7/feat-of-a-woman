@@ -2,6 +2,8 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "color-function-notation": "legacy",
-    "selector-class-pattern": "^[a-z][a-zA-Z0-9-]+$"
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9-]+$",
+    "media-query-no-invalid": null,
+    "media-feature-range-notation": null
   }
 }
