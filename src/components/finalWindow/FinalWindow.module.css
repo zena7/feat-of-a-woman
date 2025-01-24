@@ -1,0 +1,30 @@
+.endOfGame {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(2rem + 2vh);
+  background-color: rgb(255, 253, 239);
+  filter: contrast(98%) brightness(98%);
+  font-family: Caveat, serif;
+  color: #0047ab;
+  opacity: 1;
+  animation: photo-in 1s linear;
+}
+
+@keyframes photo-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.finalImg {
+  width: 60vw;
+  padding-bottom: 5vh;
+}

@@ -1,0 +1,104 @@
+:root {
+  --primary-color: white;
+  --secondary-color: rgb(227, 184, 55, 59.3%);
+}
+
+.itemHidden {
+  display: none;
+}
+
+.itemShow {
+  display: block;
+}
+
+.cityHeader {
+  position: absolute;
+  color: black;
+  color: var(--primary-color);
+  z-index: 2;
+  top: 4.5vh;
+  left: 2vw;
+  font-size: calc(1rem + 6vw);
+  animation: move-in 1s linear;
+}
+
+@keyframes move-in {
+  0% {
+    top: -12vh;
+  }
+
+  100% {
+    top: 5vh;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .cityHeader {
+    font-size: calc(1rem + 5vw);
+  }
+}
+
+.welcomeImg {
+  width: 100%;
+  height: 100%;
+}
+
+.welcomeForm {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+  background: rgb(38, 43, 24, 90%);
+  color: #f1f1f1;
+  padding-left: 2vw;
+  padding-right: 10vw;
+  font-size: 2.6rem;
+  row-gap: 0.2vh;
+  padding-bottom: 4vh;
+}
+
+.formLabel {
+  font-size: calc(1rem + 2.2vw);
+}
+
+@media screen and (max-width: 1770px) {
+  .welcomeForm {
+    padding-right: 5vw;
+  }
+
+  .formLabel {
+    font-size: calc(1rem + 2vw);
+  }
+}
+
+.inputCity {
+  background-color: rgb(255, 255, 255, 13.6%);
+  border: 3px solid var(--secondary-color);
+  border-radius: 3px;
+}
+
+.inputCity:focus {
+  background-color: rgb(255, 255, 255, 80%);
+}
+
+.btnCity {
+  background-color: transparent;
+  border: 3px solid var(--secondary-color);
+  padding: 1vh 4vw;
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  align-self: self-start;
+  margin-top: 3.6vh;
+  font-weight: 400;
+  border-radius: 3px;
+}
+
+.btnCity:hover {
+  background-color: rgb(227, 184, 55, 50%);
+}

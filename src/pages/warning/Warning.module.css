@@ -1,0 +1,90 @@
+:root {
+  --primary-color: white;
+  --secondary-color: rgb(227, 184, 55, 59.3%);
+}
+
+.background-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.content {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  background: rgb(0, 0, 0, 70%);
+  color: var(--primary-color);
+  padding-top: 5vh;
+  padding-left: 4vw;
+  padding-right: 2vw;
+}
+
+.header {
+  font-size: calc(2rem + 5.8vh);
+  padding-bottom: 2vh;
+}
+
+.warningParagraph {
+  font-size: calc(1.4rem + 1vh);
+}
+
+.firstP {
+  padding-bottom: 1.5vh;
+}
+
+.btnWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 6vh;
+}
+
+.btn {
+  background-color: transparent;
+  border: 3px solid var(--secondary-color);
+  padding: 1.6vh 4vw;
+  color: var(--primary-color);
+  font-size: calc(1.4rem + 1vh);
+  align-self: self-start;
+  margin-top: 3.6vh;
+  font-weight: 400;
+  border-radius: 3px;
+  width: 45%;
+}
+
+.btn:hover {
+  background-color: rgb(227, 184, 55, 50%);
+}
+
+.ruContent {
+  opacity: 1;
+  animation: move 1s linear;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .header {
+    font-size: calc(1.4rem + 3vh);
+    padding-bottom: 1vh;
+    color: pink;
+  }
+}
