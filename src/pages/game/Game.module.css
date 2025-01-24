@@ -30,7 +30,7 @@
   height: 106%;
   top: -1vh;
   left: 0;
-  background-image: 'url(../../../public/assets/gameBg.webp)';
+  background-image: url('../../../public/assets/gameBg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
