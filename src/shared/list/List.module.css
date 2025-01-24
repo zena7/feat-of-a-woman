@@ -1,5 +1,23 @@
+:root {
+  --primary-color: white;
+  --secondary-color: rgb(227, 184, 55, 59.3%);
+}
+
 .list {
   list-style-type: none;
   cursor: pointer;
   font-size: 2rem;
+  margin: -1vh;
+}
+
+.liItem {
+  border: 3px solid transparent;
+  border-radius: 3px;
+  transition: border-color 0.3s linear;
+  padding: 0.4vh 3vw;
+  text-align: center;
+}
+
+.liItem:hover {
+  border: 3px solid var(--secondary-color);
 }

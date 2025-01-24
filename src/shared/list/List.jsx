@@ -21,7 +21,7 @@ function List({ items, type = '', className, updateSelect, ...props }) {
       className={clsx(styles.list, className && className)}
     >
       {items.map((i) => (
-        <li key={i} className="li-item">
+        <li key={i} className={styles.liItem}>
           {i}
         </li>
       ))}
