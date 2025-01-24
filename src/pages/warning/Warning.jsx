@@ -24,13 +24,12 @@ function Warning() {
       <section className={styles.content}>
         <div className="enContent">
           <h1 className={styles.header}>Dangerous Hippo</h1>
-          <p className={styles.firstP}>
+          <p className={clsx(styles.firstP, styles.warningParagraph)}>
             According to the World Health Organization, hippos kill hundreds of
             people every year in Africa. This makes them one of the most
             dangerous big animals there.
           </p>
-          <p>
-            {' '}
+          <p className={styles.warningParagraph}>
             Hippos can exhibit aggression if they are scared. They might
             accidentally hurt someone if they move suddenly.
           </p>
@@ -50,12 +49,12 @@ function Warning() {
 
         {showRu && (
           <div className={styles.ruContent}>
-            <p className={styles.firstP}>
+            <p className={clsx(styles.firstP, styles.warningParagraph)}>
               По данным Всемирной организации здравоохранения, бегемоты ежегодно
               убивают несколько сотен человек в Африке. Это делает их одними из
               наиболее смертоносных крупных животных на континенте.
             </p>
-            <p>
+            <p className={styles.warningParagraph}>
               Бегемоты могут проявлять агрессию, если они напугаются. Бегемот
               может случайно задавить человека, переместившись в сторону.
             </p>
