@@ -18,7 +18,13 @@ function Warning() {
 
   return (
     <>
-      <video autoPlay muted loop className={styles['background-video']}>
+      <video
+        autoPlay
+        muted
+        loop
+        preload="auto"
+        className={styles['background-video']}
+      >
         <source src={aggressiveHippoVideo} type="video/mp4" />
       </video>
       <section className={styles.content}>
