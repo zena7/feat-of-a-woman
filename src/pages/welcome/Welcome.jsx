@@ -1,7 +1,8 @@
 import clsx from 'clsx';
-import { useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import cityImg from '../../../src/assets/welcomeLeningrad.webp';
+import videoForWarning from '../../assets/aggressive-hippo.mp4';
 import styles from './Welcome.module.css';
 
 function Welcome() {
@@ -22,8 +23,21 @@ function Welcome() {
   );
 
   const handleChange = useCallback((event) => {
-    console.log(event.target.value);
     setInput(event.target.value);
+  }, []);
+
+  useEffect(() => {
+    const video = document.createElement('video');
+    video.src = videoForWarning;
+    video.preload = 'auto';
+    video.addEventListener('loadeddata', () => {
+      console.log('Видео загружено до первого кадра!');
+    });
+
+    console.log('in useEffect');
+
+    const img = new Image();
+    img.src = './assets/gameBg.webp';
   }, []);
 
   return (
