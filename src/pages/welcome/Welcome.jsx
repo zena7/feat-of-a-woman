@@ -26,19 +26,7 @@ function Welcome() {
     setInput(event.target.value);
   }, []);
 
-  useEffect(() => {
-    const video = document.createElement('video');
-    video.src = videoForWarning;
-    video.preload = 'auto';
-    video.addEventListener('loadeddata', () => {
-      console.log('Видео загружено до первого кадра!');
-    });
-
-    console.log('in useEffect');
-
-    const img = new Image();
-    img.src = './assets/gameBg.webp';
-  }, []);
+  useEffect(preloadResources, []);
 
   return (
     <>
@@ -68,6 +56,20 @@ function Welcome() {
       </form>
     </>
   );
+}
+
+function preloadResources() {
+  const video = document.createElement('video');
+  video.src = videoForWarning;
+  video.preload = 'auto';
+  video.addEventListener('loadeddata', () => {
+    console.log('Видео уже загружено!');
+  });
+
+  console.log('in useEffect');
+
+  const img = new Image();
+  img.src = './assets/gameBg.webp';
 }
 
 export default Welcome;

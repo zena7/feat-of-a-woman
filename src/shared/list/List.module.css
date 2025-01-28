@@ -6,7 +6,7 @@
 .list {
   list-style-type: none;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: calc(1rem + 1.7vh);
   margin: -1vh;
 }
 
@@ -20,4 +20,11 @@
 
 .liItem:hover {
   border: 3px solid var(--secondary-color);
+}
+
+@media screen and (min-width: 1920px) {
+  .list {
+    font-size: calc(1rem + 2.6vh);
+    margin: 1vh;
+  }
 }
