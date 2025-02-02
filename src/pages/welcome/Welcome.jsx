@@ -62,14 +62,19 @@ function preloadResources() {
   const video = document.createElement('video');
   video.src = videoForWarning;
   video.preload = 'auto';
-  video.addEventListener('loadeddata', () => {
-    console.log('Видео уже загружено!');
-  });
 
-  console.log('in useEffect');
+  const handleLoadedData = () => {
+    console.log('Видео уже загружено!');
+  };
+
+  video.addEventListener('loadeddata', handleLoadedData);
 
   const img = new Image();
   img.src = './assets/gameBg.webp';
+
+  return () => {
+    video.removeEventListener('loadeddata', handleLoadedData);
+  };
 }
 
 export default Welcome;

@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import clsx from 'clsx';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import aggressiveHippoVideo from '../../../src/assets/aggressive-hippo.mp4';
 import styles from './Warning.module.css';
-import clsx from 'clsx';
 
 function Warning() {
   const [showRu, setShowRu] = useState(false);
@@ -14,7 +14,8 @@ function Warning() {
 
   const handleClickShowRuText = useCallback(() => {
     setShowRu((prev) => !prev);
-    console.log('Width', window.innerWidth);
+    console.log('Width', window.innerWidth, window.innerHeight);
+
     //добавила для отладки ширины экрана в хроме. не совпадает с шириной, заданной в хроме
   }, []);
 

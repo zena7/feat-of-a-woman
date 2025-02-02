@@ -3,19 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import FinalWindow from '../../components/finalWindow/FinalWindow';
 import List from '../../shared/list/List';
 import styles from './Game.module.css';
-
-const dic = {
-  Kind: 'Добрый',
-  Brave: 'Смелый',
-  Strong: 'Сильный',
-  Caring: 'Заботливый',
-  Patient: 'Терпеливый',
-  Responsive: 'Отзывчивый',
-  Reliable: 'Надежный',
-  Courageous: 'Мужественный',
-  Persistent: 'Упорный',
-  Heroic: 'Героический',
-};
+import { DIC as dic } from '../../data.js';
+import { addClass, removeClass } from '../../utils/domUtils.js';
 
 function shuffle(ar) {
   for (let i = ar.length - 1; i > 0; i--) {
@@ -26,12 +15,6 @@ function shuffle(ar) {
 
   return ar;
 }
-
-function addClass(node, className) {
-  node.classList.add(className);
-}
-
-const removeClass = (node, className) => node.classList.remove(className);
 
 function Game() {
   const [enList, setEnList] = useState(() => shuffle(Object.keys(dic)));
@@ -50,9 +33,8 @@ function Game() {
   );
 
   useEffect(() => {
-    console.log('PAIR', pairValues);
     if (pairValues?.length === 2) {
-      let result = isMatch(pairValues);
+      handlePairCheck(pairValues);
 
       setPairValues((prev) => {
         prev.length = 0;
@@ -73,6 +55,12 @@ function Game() {
       isRightCouple = dic[secondV.value] === firstV.value;
       firstSelectLang = 'ru';
     }
+
+    return { isRightCouple, firstSelectLang };
+  }
+
+  function handlePairCheck([firstV, secondV]) {
+    const { isRightCouple, firstSelectLang } = isMatch([firstV, secondV]);
 
     pairValues.forEach(({ value, type, href }) => {
       if (isRightCouple) {
@@ -104,8 +92,6 @@ function Game() {
         removeClass(href, styles['li-false-couple']);
       }, 2000);
     });
-
-    return isRightCouple;
   }
 
   return (
