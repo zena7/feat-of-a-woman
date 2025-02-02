@@ -14,7 +14,6 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  font-size: calc(1rem + 6vh);
   color: var(--font-color);
   font-weight: 400;
   row-gap: -1%;
@@ -22,6 +21,8 @@
 
 .headerGame {
   color: rgb(227, 184, 65);
+  font-size: calc(2.2rem + 21vh);
+  max-height: 300px;
 }
 
 .background {
@@ -72,3 +73,32 @@
   border: 3px solid red;
   background-color: rgb(255, 0, 0, 26.9%);
 }
+
+@media screen and (min-width: 1920px) {
+  .game {
+    /* font-size: calc(1rem + 8vh); */
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .game {
+    padding-top: 0;
+  }
+
+  .headerGame {
+    font-size: calc(2rem + 2vh + 11vw);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .headerGame {
+    font-size: calc(2rem + 3.5vh + 9vw);
+  }
+}
+
+/* @container (max-height: 250px) {
+  .headerGame {
+    font-size: calc(2.2rem + 16vh);
+    border: 2px solid pink;
+  }
+} */
